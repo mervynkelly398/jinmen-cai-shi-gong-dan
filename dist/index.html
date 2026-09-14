@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="津门蔡氏贡掸——六代相承的传统手工技艺。">
+    <title>津门蔡氏贡掸</title>
+    <style>
+      :root {
+        --ink: #112e39;
+        --ink-deep: #0b2029;
+        --vermillion: #aa3f30;
+        --gold: #e4ac59;
+        --paper: #f8f3e9;
+        --paper-warm: #efe4d2;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: "Noto Serif SC", "Songti SC", STSong, "SimSun", serif;
+        line-height: 1.8;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: grid;
+        place-items: end center;
+        overflow: hidden;
+        padding: 2rem 1.25rem 3rem;
+        color: #fffaf1;
+        background: var(--ink-deep) url("0353e3190be4eedc358080fff542733b.jpg") center / cover no-repeat;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(8, 27, 36, .35) 0%, rgba(8, 27, 36, .72) 66%, rgba(8, 27, 36, .94) 100%);
+      }
+
+      .hero-content {
+        position: relative;
+        width: min(100%, 38rem);
+        text-align: center;
+        animation: rise .8s ease-out both;
+      }
+
+      .hero-eyebrow {
+        margin: 0 0 .8rem;
+        color: #f6ce87;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        font-size: .74rem;
+        font-weight: 700;
+        letter-spacing: .22em;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 12vw, 4.7rem);
+        line-height: 1.18;
+        letter-spacing: .1em;
+        text-indent: .1em;
+        font-weight: 600;
+      }
+
+      .hero-intro {
+        max-width: 23rem;
+        margin: 1.35rem auto 0;
+        font-size: clamp(1rem, 4.4vw, 1.22rem);
+        line-height: 1.9;
+      }
+
+      .scroll-cue {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .45rem;
+        margin-top: 2.35rem;
+        color: rgba(255, 250, 241, .85);
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        font-size: .68rem;
+        letter-spacing: .18em;
+        text-decoration: none;
+      }
+
+      .scroll-cue::after {
+        content: "";
+        width: 1px;
+        height: 2.4rem;
+        background: linear-gradient(#f6ce87, transparent);
+      }
+
+      main { overflow: hidden; }
+
+      .brand-mark {
+        width: min(100% - 2.5rem, 25rem);
+        margin: -1.65rem auto 0;
+        padding: .9rem 1.1rem .45rem;
+        position: relative;
+        z-index: 1;
+        border-radius: .25rem;
+        background: #fff;
+        box-shadow: 0 1rem 2.5rem rgba(17, 46, 57, .12);
+      }
+
+      .brand-mark img {
+        display: block;
+        width: 100%;
+        height: 12rem;
+        margin: 0 auto;
+        object-fit: contain;
+      }
+
+      .content {
+        width: min(100% - 2.5rem, 42rem);
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 4.9rem 0;
+      }
+
+      .section + .section {
+        border-top: 1px solid rgba(17, 46, 57, .16);
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        margin: 0 0 .85rem;
+        color: var(--vermillion);
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        font-size: .73rem;
+        font-weight: 700;
+        letter-spacing: .17em;
+      }
+
+      .section-label::before {
+        content: "";
+        width: 1.7rem;
+        height: 1px;
+        background: currentColor;
+      }
+
+      h2 {
+        max-width: 11em;
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(1.85rem, 7.5vw, 2.7rem);
+        line-height: 1.35;
+        font-weight: 600;
+      }
+
+      .section p {
+        margin: 1.55rem 0 0;
+        font-size: clamp(1rem, 4.25vw, 1.15rem);
+      }
+
+      .section strong {
+        color: var(--vermillion);
+        font-weight: 700;
+      }
+
+      .heritage { background: linear-gradient(135deg, rgba(228, 172, 89, .17), transparent 68%); }
+
+      .craft-card {
+        margin-top: 1.8rem;
+        padding: 1.5rem 1.35rem;
+        border-left: 3px solid var(--gold);
+        color: #fffaf1;
+        background: var(--ink);
+      }
+
+      .craft-card p { margin: 0; }
+
+      .craft-card small {
+        display: block;
+        margin-bottom: .45rem;
+        color: #f6ce87;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        font-size: .7rem;
+        letter-spacing: .16em;
+      }
+
+      .product-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: .8rem;
+        margin: 1.35rem 0 0;
+      }
+
+      .product-gallery figure {
+        margin: 0;
+        overflow: hidden;
+        background: var(--ink-deep);
+      }
+
+      .product-gallery figure:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .product-gallery img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .45s ease;
+      }
+
+      .product-gallery figure:not(:last-child) {
+        aspect-ratio: 3 / 4;
+      }
+
+      .product-gallery figure:last-child {
+        aspect-ratio: 16 / 9;
+      }
+
+      .product-gallery figure:hover img {
+        transform: scale(1.03);
+      }
+
+      .value { padding-bottom: 5.5rem; }
+
+      .heritage-note {
+        margin-top: 2rem;
+        padding-top: 1.4rem;
+        border-top: 1px solid rgba(17, 46, 57, .16);
+        color: rgba(17, 46, 57, .8);
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        font-size: .82rem;
+        line-height: 1.8;
+      }
+
+      footer {
+        padding: 1.8rem 1.25rem;
+        color: rgba(255, 250, 241, .75);
+        background: var(--ink-deep);
+        text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+        font-size: .72rem;
+        letter-spacing: .08em;
+      }
+
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(1.2rem); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @media (max-width: 640px) {
+        .hero { min-height: 92svh; }
+        .brand-mark img { height: 10rem; }
+        .section { padding: 4rem 0; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .hero-content { animation: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">CAI IMPERIAL FEATHER DUSTER</p>
+        <h1>津门蔡氏贡掸</h1>
+        <p class="hero-intro">一把源自北方日常生活的手工贡掸，承载六代相传的选材、理羽与绑扎技艺。</p>
+        <a class="scroll-cue" href="#heritage" aria-label="浏览品牌故事">向下了解</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="brand-mark">
+        <img src="744629eb1e0bfd93828b131a7dc852b1.jpg" alt="津门蔡氏贡掸品牌标志">
+      </div>
+
+      <div class="content">
+        <section class="section heritage" id="heritage">
+          <p class="section-label">品牌传承 · BRAND HERITAGE</p>
+          <h2>从北京黄村，到天津津门</h2>
+          <p>蔡氏制掸技艺可追溯至清代。民国后期，蔡氏家族迁居天津，将手艺在此延续、经营与传播。由家传手艺到今日品牌，<strong>六代人的亲手传习</strong>从未脱离对材料与结构的判断。</p>
+          <p>关于 1884 年慈禧五十寿辰所制九十九把贡掸的故事，为<strong>蔡氏家族世代相传</strong>的记忆；“贡掸”之名也由此承载对精工、端正与华美形制的追求。</p>
+        </section>
+
+        <section class="section" id="craft">
+          <p class="section-label">HANDCRAFT</p>
+          <h2>轻柔的羽，严谨的骨</h2>
+          <p>一把精品贡掸，从鸡尾、鸡背、鸡颈中择取适合制掸的优质羽毛，蔡家称之为<strong>“三把毛”</strong>。色泽、弧度、宽窄与韧性，都要在天然羽毛的差异中逐一判断、搭配。</p>
+          <div class="craft-card">
+            <small>18 TRADITIONAL STEPS</small>
+            <p>分拣、处理、穿线、洗水、理羽、分层、绑扎、成形、修整……历经<strong>十八道传统工序</strong>，使羽面饱满舒展、绑扎匀称坚实。蔡家以“<strong>宁折不散</strong>”概括对牢固程度的要求。</p>
+          </div>
+          <div class="product-gallery" aria-label="蔡氏贡掸作品图集">
+            <figure><img src="00990c52c9fe9298dff5c937b4ea132f.png" alt="褐色羽毛贡掸"></figure>
+            <figure><img src="89b0ecba6ed15aa7d9d1f64fcad9e56a.png" alt="红色羽毛贡掸"></figure>
+            <figure><img src="271789ec439ed42d5f75ce207170bb2b.jpg" alt="白色羽毛贡掸"></figure>
+          </div>
+        </section>
+
+        <section class="section value" id="value">
+          <p class="section-label">LIVING HERITAGE</p>
+          <h2>可拂尘，亦可陈设与礼赠</h2>
+          <p>它能轻柔清理字画、木器和室内摆件；置于案前与掸瓶之中，又显出羽色、层次与比例之美。在婚嫁、乔迁、开业与节庆等场景里，贡掸也寄托着平安、吉祥与辞旧迎新的生活愿望。</p>
+          <p class="heritage-note">“津门蔡氏贡掸制作技艺”已于 2009 年 10 月 23 日列入天津市第二批市级非物质文化遗产名录，申报地区为南开区。</p>
+        </section>
+      </div>
+    </main>
+
+    <footer>津门蔡氏贡掸 · 手工传承，敬待相逢</footer>
+  </body>
+</html>
