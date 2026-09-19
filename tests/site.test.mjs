@@ -47,3 +47,13 @@ test('includes the supplied feather-duster product images', async () => {
     await access(path.join(root, image));
   }
 });
+
+test('shows the supplied intangible cultural heritage certificate', async () => {
+  const html = await readFile(indexPath, 'utf8');
+  const certificate = 'd1d5d651ad455d471a2f7c15258f4a35.jpg';
+
+  assert.match(html, new RegExp(`<img[^>]+src="${certificate}"[^>]+alt="天津市非物质文化遗产证书"`));
+  assert.match(html, /非遗认证/);
+  assert.match(html, /<section class="section value"[^>]*>[\s\S]*d1d5d651ad455d471a2f7c15258f4a35\.jpg[\s\S]*<\/section>/);
+  await access(path.join(root, certificate));
+});
