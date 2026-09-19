@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile, access } from 'node:fs/promises';
+import { readFile, access, stat } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -37,14 +37,26 @@ test('shows the complete logo without cover-cropping', async () => {
 test('includes the supplied feather-duster product images', async () => {
   const html = await readFile(indexPath, 'utf8');
   const productImages = [
-    '00990c52c9fe9298dff5c937b4ea132f.png',
+    'product-brown-optimized.jpg',
     '271789ec439ed42d5f75ce207170bb2b.jpg',
-    '89b0ecba6ed15aa7d9d1f64fcad9e56a.png',
+    'product-red-optimized.jpg',
   ];
 
   for (const image of productImages) {
     assert.match(html, new RegExp(image));
     await access(path.join(root, image));
+  }
+});
+
+test('uses lightweight versions of the two large product photos', async () => {
+  const html = await readFile(indexPath, 'utf8');
+  const optimizedImages = ['product-brown-optimized.jpg', 'product-red-optimized.jpg'];
+
+  assert.doesNotMatch(html, /00990c52c9fe9298dff5c937b4ea132f\.png/);
+  assert.doesNotMatch(html, /89b0ecba6ed15aa7d9d1f64fcad9e56a\.png/);
+  for (const image of optimizedImages) {
+    const file = await stat(path.join(root, image));
+    assert.ok(file.size < 500_000, `${image} should remain under 500 KB`);
   }
 });
 
