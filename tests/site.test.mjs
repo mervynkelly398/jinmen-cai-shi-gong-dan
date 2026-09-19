@@ -17,14 +17,14 @@ test('provides a self-contained, mobile-ready NFC landing page', async () => {
   assert.match(html, /宁折不散/);
   assert.match(html, /天津市第二批市级非物质文化遗产名录/);
   assert.doesNotMatch(html, /据提供的品牌申报材料/);
-  assert.match(html, /0353e3190be4eedc358080fff542733b\.jpg/);
-  assert.match(html, /744629eb1e0bfd93828b131a7dc852b1\.jpg/);
+  assert.match(html, /hero-background\.webp/);
+  assert.match(html, /brand-logo\.webp/);
   assert.match(html, /@media\s*\(max-width:\s*640px\)/);
 });
 
-test('references the supplied background and logo files', async () => {
-  await access(path.join(root, '0353e3190be4eedc358080fff542733b.jpg'));
-  await access(path.join(root, '744629eb1e0bfd93828b131a7dc852b1.jpg'));
+test('references optimized background and logo files', async () => {
+  await access(path.join(root, 'hero-background.webp'));
+  await access(path.join(root, 'brand-logo.webp'));
 });
 
 test('shows the complete logo without cover-cropping', async () => {
@@ -37,9 +37,9 @@ test('shows the complete logo without cover-cropping', async () => {
 test('includes the supplied feather-duster product images', async () => {
   const html = await readFile(indexPath, 'utf8');
   const productImages = [
-    'product-brown-optimized.jpg',
-    '271789ec439ed42d5f75ce207170bb2b.jpg',
-    'product-red-optimized.jpg',
+    'product-brown.webp',
+    'product-white.webp',
+    'product-red.webp',
   ];
 
   for (const image of productImages) {
@@ -48,24 +48,31 @@ test('includes the supplied feather-duster product images', async () => {
   }
 });
 
-test('uses lightweight versions of the two large product photos', async () => {
+test('uses lightweight WebP files for every displayed image', async () => {
   const html = await readFile(indexPath, 'utf8');
-  const optimizedImages = ['product-brown-optimized.jpg', 'product-red-optimized.jpg'];
+  const optimizedImages = [
+    'hero-background.webp',
+    'brand-logo.webp',
+    'product-brown.webp',
+    'product-red.webp',
+    'product-white.webp',
+    'heritage-certificate.webp',
+  ];
 
-  assert.doesNotMatch(html, /00990c52c9fe9298dff5c937b4ea132f\.png/);
-  assert.doesNotMatch(html, /89b0ecba6ed15aa7d9d1f64fcad9e56a\.png/);
+  assert.doesNotMatch(html, /(?:src=|url\()[^>)]*\.(?:png|jpe?g)/i);
   for (const image of optimizedImages) {
     const file = await stat(path.join(root, image));
-    assert.ok(file.size < 500_000, `${image} should remain under 500 KB`);
+    assert.match(html, new RegExp(image));
+    assert.ok(file.size < 350_000, `${image} should remain under 350 KB`);
   }
 });
 
 test('shows the supplied intangible cultural heritage certificate', async () => {
   const html = await readFile(indexPath, 'utf8');
-  const certificate = 'd1d5d651ad455d471a2f7c15258f4a35.jpg';
+  const certificate = 'heritage-certificate.webp';
 
   assert.match(html, new RegExp(`<img[^>]+src="${certificate}"[^>]+alt="天津市非物质文化遗产证书"`));
   assert.match(html, /非遗认证/);
-  assert.match(html, /<section class="section value"[^>]*>[\s\S]*d1d5d651ad455d471a2f7c15258f4a35\.jpg[\s\S]*<\/section>/);
+  assert.match(html, /<section class="section value"[^>]*>[\s\S]*heritage-certificate\.webp[\s\S]*<\/section>/);
   await access(path.join(root, certificate));
 });
